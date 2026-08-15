@@ -1,5 +1,7 @@
 # dsh-file-explorer-preview-molstar
 
+[中文](README.zh.md) | English
+
 A [DSH Web](https://deepseek.com) plugin that adds a **Mol\* 3D structure viewer** to [dsh-file-explorer](https://github.com/wolfsonliu/dsh-file-explorer), overriding its plain previews for protein-structure and small-molecule files.
 
 Select a `.cif` / `.pdb` (or any supported format below) in the file explorer and the preview panel renders an interactive 3D model instead of raw text.
@@ -71,7 +73,7 @@ dsh plugin --profile web add .
 
 > For local development, this repo's `devDependencies` resolves `@dsh-external/dsh-file-explorer`'s `./client` type definitions. Point it at your checkout or your registry's published package before `npm install`.
 
-For files ≤ 2 MiB the plugin parses the `text` preview content directly. To preview **larger** files and `.bcif`, `dsh-file-explorer` must also expose `readRawFile` (a small core change described in [`docs/specs/handoff-2026-08-15-molstar-core-changes.md`](docs/specs/handoff-2026-08-15-molstar-core-changes.md)). Until that change is applied, the plugin degrades gracefully: ≤ 2 MiB files still preview, larger ones show the core's "too large" status.
+For files ≤ 2 MiB the plugin parses the `text` preview content directly. To preview **larger** files and `.bcif`, `dsh-file-explorer` must also expose `readRawFile` (a small core change described in [`docs/handoff-2026-08-15-molstar-core-changes.md`](docs/handoff-2026-08-15-molstar-core-changes.md)). Until that change is applied, the plugin degrades gracefully: ≤ 2 MiB files still preview, larger ones show the core's "too large" status.
 
 ## Limitations
 
@@ -90,3 +92,7 @@ npm run build   # tsc + tsdown (single-file lib/client.js bundling molstar)
 The real WebGL mount cannot run under jsdom; verify it with `dsh web` and a structure file in `examples/`.
 
 > After `npm run build`, hard-refresh the browser (`Ctrl/Cmd+Shift+R`): `dsh web` may keep serving a cached plugin bundle, so a soft reload can leave your latest build unused.
+
+## License
+
+[MIT](LICENSE)

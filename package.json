@@ -36,15 +36,14 @@
     "check": "tsc -p tsconfig.json --noEmit --pretty false",
     "test": "vitest run"
   },
-  "dependencies": {
-    "molstar": "^5.11.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@dsh-external/dsh-file-explorer": "github:wolfsonliu/dsh-file-explorer",
     "@types/node": "^22.0.0",
     "@types/react": "~18.3.1",
     "@types/react-dom": "~18.3.0",
     "jsdom": "^25.0.0",
+    "molstar": "^5.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsdown": "^0.22.14",

@@ -1,5 +1,7 @@
 # dsh-file-explorer-preview-molstar
 
+[English](README.md) | 中文
+
 为 [dsh-file-explorer](https://github.com/wolfsonliu/dsh-file-explorer) 增加 **Mol\* 3D 结构查看器** 的 [DSH Web](https://deepseek.com) 插件，覆盖其对蛋白质结构与小分子文件的纯文本预览。
 
 在文件浏览器里选中 `.cif` / `.pdb`（或下列任意支持格式），预览面板即渲染可交互的 3D 模型，而非原始文本。
@@ -71,7 +73,7 @@ dsh plugin --profile web add .
 
 > 本地开发时，本仓库的 `devDependencies` 用于让 `tsc` 解析 `@dsh-external/dsh-file-explorer` 的 `./client` 类型定义。`npm install` 前请将其指向你自己的 checkout（或 registry 上发布的包）。
 
-≤ 2 MiB 的文件插件直接解析 `text` 预览内容。要预览**更大**的文件与 `.bcif`，`dsh-file-explorer` 还需暴露 `readRawFile`（一处核心小改动，见 [`docs/specs/handoff-2026-08-15-molstar-core-changes.md`](docs/specs/handoff-2026-08-15-molstar-core-changes.md)）。在该改动落地前，插件自动降级：≤ 2 MiB 仍可预览，更大的文件显示核心的"文件过大"提示。
+≤ 2 MiB 的文件插件直接解析 `text` 预览内容。要预览**更大**的文件与 `.bcif`，`dsh-file-explorer` 还需暴露 `readRawFile`（一处核心小改动，见 [`docs/handoff-2026-08-15-molstar-core-changes.md`](docs/handoff-2026-08-15-molstar-core-changes.md)）。在该改动落地前，插件自动降级：≤ 2 MiB 仍可预览，更大的文件显示核心的"文件过大"提示。
 
 ## 限制
 
@@ -90,3 +92,7 @@ npm run build   # tsc + tsdown（单文件 lib/client.js，内联 molstar）
 真实 WebGL 挂载无法在 jsdom 下运行；请用 `dsh web` 配合 `examples/` 里的结构文件做冒烟验证。
 
 > `npm run build` 后请硬刷新浏览器（`Ctrl/Cmd+Shift+R`）：`dsh web` 可能仍缓存旧的插件 bundle，软刷新用不到最新构建。
+
+## License
+
+[MIT](LICENSE)
