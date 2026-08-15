@@ -93,6 +93,14 @@ npm run build   # tsc + tsdown（单文件 lib/client.js，内联 molstar）
 
 > `npm run build` 后请硬刷新浏览器（`Ctrl/Cmd+Shift+R`）：`dsh web` 可能仍缓存旧的插件 bundle，软刷新用不到最新构建。
 
+## 致谢
+
+本插件基于 [**Mol\***](https://molstar.org)（`/ˈmol-star/`）构建——面向（不仅限于）大分子结构数据的下一代技术栈，由 [PDBe](https://www.ebi.ac.uk/pdbe/) 与 [RCSB PDB](https://www.rcsb.org/) 联合发起。
+
+**使用 Mol\* 时，请引用：**
+
+> David Sehnal, Sebastian Bittrich, Mandar Deshpande, Radka Svobodová, Karel Berka, Václav Bazgier, Sameer Velankar, Stephen K Burley, Jaroslav Koča, Alexander S Rose: *Mol\* Viewer: modern web app for 3D visualization and analysis of large biomolecular structures*, Nucleic Acids Research, 2021; https://doi.org/10.1093/nar/gkab314.
+
 ## License
 
 [MIT](LICENSE)

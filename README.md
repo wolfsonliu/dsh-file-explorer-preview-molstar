@@ -93,6 +93,14 @@ The real WebGL mount cannot run under jsdom; verify it with `dsh web` and a stru
 
 > After `npm run build`, hard-refresh the browser (`Ctrl/Cmd+Shift+R`): `dsh web` may keep serving a cached plugin bundle, so a soft reload can leave your latest build unused.
 
+## Acknowledgments
+
+This plugin is built on [**Mol\***](https://molstar.org) (`/ˈmol-star/`), a next-generation technology stack for (not only) macromolecular structure data, jointly initiated by [PDBe](https://www.ebi.ac.uk/pdbe/) and [RCSB PDB](https://www.rcsb.org/).
+
+**When using Mol\*, please cite:**
+
+> David Sehnal, Sebastian Bittrich, Mandar Deshpande, Radka Svobodová, Karel Berka, Václav Bazgier, Sameer Velankar, Stephen K Burley, Jaroslav Koča, Alexander S Rose: *Mol\* Viewer: modern web app for 3D visualization and analysis of large biomolecular structures*, Nucleic Acids Research, 2021; https://doi.org/10.1093/nar/gkab314.
+
 ## License
 
 [MIT](LICENSE)
