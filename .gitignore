@@ -1,0 +1,11 @@
+molstar/*
+
+# Local design/plan notes — kept on disk, kept out of git.
+docs/specs/
+docs/plans/
+
+# Dependencies
+node_modules/
+.npm-cache/
+*.tsbuildinfo
+*.log

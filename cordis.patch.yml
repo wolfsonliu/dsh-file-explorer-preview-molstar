@@ -1,0 +1,3 @@
+- insert:
+    - id: file-explorer-preview-molstar
+      name: '@dsh-external/dsh-file-explorer-preview-molstar'
