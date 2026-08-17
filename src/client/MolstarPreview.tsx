@@ -7,7 +7,7 @@ import { Vec3 } from 'molstar/lib/mol-math/linear-algebra/3d/vec3.js'
 import type { PreviewProps, Translate } from '@dsh-external/dsh-file-explorer/client'
 import { extensionOf, formatFor, formatLabelFor } from './formats.ts'
 
-type ReadRaw = (path: string) => Promise<ArrayBuffer>
+type ReadRaw = (path: string, offset?: number, limit?: number) => Promise<ArrayBuffer>
 
 type LoadState =
   | { phase: 'loading' }
@@ -42,11 +42,10 @@ function setBackground(plugin: PluginContext, isDark: boolean): void {
 }
 
 /**
- * Create the Mol* preview component, closing over the raw-bytes reader (from
- * the core `fileExplorer.readRawFile`; undefined until the core change lands)
- * and the plugin's own translator.
+ * Create the Mol* preview component, closing over the raw-bytes reader
+ * (from the core `fileExplorer.readRawFile`) and the plugin's own translator.
  */
-export function makeMolstarPreview(readRaw: ReadRaw | undefined, t: Translate): ComponentType<PreviewProps> {
+export function makeMolstarPreview(readRaw: ReadRaw, t: Translate): ComponentType<PreviewProps> {
   return function MolstarPreview({ preview, filePath }: PreviewProps) {
     const viewportRef = useRef<HTMLDivElement | null>(null)
     const pluginRef = useRef<PluginContext | null>(null)
@@ -95,8 +94,11 @@ export function makeMolstarPreview(readRaw: ReadRaw | undefined, t: Translate): 
           if (preview.kind === 'text') {
             data = preview.content
           } else {
-            if (readRaw === undefined) throw new Error(t('tooLarge'))
-            data = await readRaw(filePath)
+            const raw = await readRaw(filePath)
+            // .bcif is binary CIF (msgpack-encoded); all other structure formats
+            // are text-based and must be decoded to a string so that CIF.parse()
+            // routes to the text parser rather than the binary (msgpack) parser.
+            data = ext === 'bcif' ? raw : new TextDecoder().decode(raw)
           }
           if (cancelled) return
 

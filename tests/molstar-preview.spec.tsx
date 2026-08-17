@@ -8,6 +8,7 @@ import { makeMolstarPreview } from '../src/client/MolstarPreview.tsx'
 (globalThis as { IS_REACT_ACT_ENVIRONMENT?: boolean }).IS_REACT_ACT_ENVIRONMENT = true
 
 const t = ((key: string) => `T:${key}`) as PreviewProps['t']
+const noopReadRaw = async () => new ArrayBuffer(0)
 
 function render(element: React.ReactElement): HTMLElement {
   const container = document.createElement('div')
@@ -21,7 +22,7 @@ function render(element: React.ReactElement): HTMLElement {
 
 describe('MolstarPreview', () => {
   test('returns null for a non-structure preview kind without mounting Mol*', () => {
-    const Preview = makeMolstarPreview(undefined, t)
+    const Preview = makeMolstarPreview(noopReadRaw, t)
     const preview: PreviewProps['preview'] = {
       kind: 'image', name: 'x.png', mime: 'image/png', dataUrl: 'data:image/png;base64,', size: 1,
     }
@@ -33,7 +34,7 @@ describe('MolstarPreview', () => {
   })
 
   test('renders an unsupported message for a text file with no known structure extension', () => {
-    const Preview = makeMolstarPreview(undefined, t)
+    const Preview = makeMolstarPreview(noopReadRaw, t)
     const preview: PreviewProps['preview'] = {
       kind: 'text', name: 'README', extension: '', content: 'hi', size: 2,
     }

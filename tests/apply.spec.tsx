@@ -82,8 +82,21 @@ describe('apply', () => {
     expect(document.querySelector('style[data-molstar-preview-style]')).toBeNull()
   })
 
-  test('degrades gracefully when readRawFile is absent from the service', () => {
-    const { ctx } = makeCtx() // no readRawFile
+  test('passes readRawFile to the preview component', () => {
+    const readRawFile = vi.fn(async () => new ArrayBuffer(0))
+    const ctx: MockCtx = {
+      fileExplorer: {
+        registerPreview: vi.fn(() => () => {}),
+        registerFileAction: vi.fn(),
+        writeFile: vi.fn(async () => {}),
+        readRawFile,
+      },
+      locale: {
+        register: vi.fn(() => () => {}),
+        bind: vi.fn(() => ((key: string) => key)),
+      },
+      effect: vi.fn((cb: () => (() => void)) => { cb()() }),
+    }
     expect(() => apply(ctx as never)).not.toThrow()
     expect(ctx.fileExplorer.registerPreview).toHaveBeenCalledTimes(STRUCTURE_EXTS.length)
   })

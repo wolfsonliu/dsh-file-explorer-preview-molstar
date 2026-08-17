@@ -1,11 +1,11 @@
 import type { FileExplorerService, Translate } from '@dsh-external/dsh-file-explorer/client';
 /**
- * `readRawFile` is added by a core change in dsh-file-explorer (see
- * docs/handoff-2026-08-15-molstar-core-changes.md). Until that lands, the
- * property is absent and the plugin degrades to ≤2 MiB text previews only.
+ * `readRawFile` is part of the FileExplorerService contract since
+ * dsh-file-explorer v0.1.0. The type augmentation here bridges the
+ * potentially older devDependency types; at runtime the core provides it.
  */
 type MolstarFileExplorer = FileExplorerService & {
-    readRawFile?: (path: string) => Promise<ArrayBuffer>;
+    readRawFile(path: string, offset?: number, limit?: number): Promise<ArrayBuffer>;
 };
 interface ClientContext {
     fileExplorer: MolstarFileExplorer;

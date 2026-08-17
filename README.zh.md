@@ -19,7 +19,7 @@
 - **着色**：默认 / 按链 / 按实体；**复位视角**、**旋转开关**、跟随 DSH `data-ds-dark-theme` 的**深浅背景**。
 - **状态栏**：格式徽标 + 原子/残基/链计数。
 - 工具条与状态栏文案**双语**（中文 / English）。
-- **大文件与二进制**：超过核心 2 MiB 文本上限的文件与 `.bcif`，通过核心 `fileExplorer.readRawFile` 拉取原始字节（见[依赖](#依赖)）。
+- **大文件与二进制**：超过核心 2 MiB 文本上限的文件与 `.bcif`，通过核心 `fileExplorer.readRawFile` 拉取原始字节（dsh-file-explorer v0.1.0+ 标准特性）。
 
 ## 支持的格式
 
@@ -73,7 +73,7 @@ dsh plugin --profile web add .
 
 > 本地开发时，本仓库的 `devDependencies` 用于让 `tsc` 解析 `@dsh-external/dsh-file-explorer` 的 `./client` 类型定义。`npm install` 前请将其指向你自己的 checkout（或 registry 上发布的包）。
 
-≤ 2 MiB 的文件插件直接解析 `text` 预览内容。要预览**更大**的文件与 `.bcif`，`dsh-file-explorer` 还需暴露 `readRawFile`（一处核心小改动，见 [`docs/handoff-2026-08-15-molstar-core-changes.md`](docs/handoff-2026-08-15-molstar-core-changes.md)）。在该改动落地前，插件自动降级：≤ 2 MiB 仍可预览，更大的文件显示核心的"文件过大"提示。
+≤ 2 MiB 的文件插件直接解析 `text` 预览内容。更大的文件与 `.bcif` 通过 `readRawFile` 获取原始字节——这是 dsh-file-explorer v0.1.0+ 中 `FileExplorerService` 契约的标准组成部分。
 
 ## 限制
 

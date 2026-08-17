@@ -9,12 +9,12 @@ import { VIEWER_CSS } from './styles.ts'
 // ---------------------------------------------------------------------------
 
 /**
- * `readRawFile` is added by a core change in dsh-file-explorer (see
- * docs/handoff-2026-08-15-molstar-core-changes.md). Until that lands, the
- * property is absent and the plugin degrades to ≤2 MiB text previews only.
+ * `readRawFile` is part of the FileExplorerService contract since
+ * dsh-file-explorer v0.1.0. The type augmentation here bridges the
+ * potentially older devDependency types; at runtime the core provides it.
  */
 type MolstarFileExplorer = FileExplorerService & {
-  readRawFile?: (path: string) => Promise<ArrayBuffer>
+  readRawFile(path: string, offset?: number, limit?: number): Promise<ArrayBuffer>
 }
 
 interface ClientContext {
@@ -41,13 +41,10 @@ export function apply(ctx: ClientContext): void {
   ctx.effect(() => {
     const disposeLocale = registerMolstarLocale(ctx)
     const t = ctx.locale.bind(MOLSTAR_NS)
-    const readRaw = typeof ctx.fileExplorer.readRawFile === 'function'
-      ? ctx.fileExplorer.readRawFile
-      : undefined
 
     // One shared viewer component for every structure extension at priority 10,
     // overriding dsh-file-explorer's built-in previews (priority 0).
-    const component = makeMolstarPreview(readRaw, t)
+    const component = makeMolstarPreview(ctx.fileExplorer.readRawFile, t)
     const disposers = STRUCTURE_EXTS.map(ext =>
       ctx.fileExplorer.registerPreview(ext, component, 10),
     )
