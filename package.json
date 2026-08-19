@@ -1,6 +1,6 @@
 {
   "name": "@dsh-external/dsh-file-explorer-preview-molstar",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Mol* 3D structure viewer preview for DSH Web, overriding dsh-file-explorer's previews for .cif/.pdb and small-molecule/docking files",
   "type": "module",
   "main": "./lib/index.js",

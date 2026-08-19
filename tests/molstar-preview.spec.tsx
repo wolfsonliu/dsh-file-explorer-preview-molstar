@@ -44,4 +44,16 @@ describe('MolstarPreview', () => {
     expect(container.querySelector('.dsh-ms')).not.toBeNull()
     expect(container.textContent).toContain('T:unsupported')
   })
+
+  test('recognizes text-large as a structure kind (renders unsupported for an unknown extension)', () => {
+    const Preview = makeMolstarPreview(noopReadRaw, t)
+    const preview: PreviewProps['preview'] = {
+      kind: 'text-large', name: 'big.txt', extension: 'txt', size: 3 * 1024 * 1024,
+    }
+
+    const container = render(<Preview preview={preview} filePath="big.txt" activeView="preview" t={t} />)
+
+    expect(container.querySelector('.dsh-ms')).not.toBeNull()
+    expect(container.textContent).toContain('T:unsupported')
+  })
 })

@@ -19,7 +19,7 @@ Select a `.cif` / `.pdb` (or any supported format below) in the file explorer an
 - **Coloring** by default / chain / entity, **reset camera**, **spin toggle**, and a **dark/light background** that follows DSH's `data-ds-dark-theme`.
 - **Status bar** with the format badge and atom/residue/chain counts.
 - **Localized** toolbar/status copy (中文 / English).
-- **Large & binary files**: for files over the core's 2 MiB text cap, and for `.bcif`, the plugin fetches raw bytes through the core's `fileExplorer.readRawFile` (standard in dsh-file-explorer v0.1.0+).
+- **Large & binary files**: for files over the core's 2 MiB text cap (returned as the `text-large` kind since dsh-file-explorer v0.3.0), and for `.bcif`, the plugin fetches raw bytes through the core's `fileExplorer.readRawFile` (standard in dsh-file-explorer v0.1.0+).
 
 ## Supported formats
 
@@ -73,7 +73,7 @@ dsh plugin --profile web add .
 
 > For local development, this repo's `devDependencies` resolves `@dsh-external/dsh-file-explorer`'s `./client` type definitions. Point it at your checkout or your registry's published package before `npm install`.
 
-For files ≤ 2 MiB the plugin parses the `text` preview content directly. For larger files and `.bcif`, the plugin uses `readRawFile` to fetch raw bytes — this is a standard part of the `FileExplorerService` contract in dsh-file-explorer v0.1.0+.
+For files ≤ 2 MiB the plugin parses the `text` preview content directly. For larger text files (`text-large` since v0.3.0) and `.bcif`, the plugin uses `readRawFile` to fetch raw bytes — this is a standard part of the `FileExplorerService` contract in dsh-file-explorer v0.1.0+ (unchanged in v0.3.0).
 
 ## Limitations
 

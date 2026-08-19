@@ -61,7 +61,7 @@ export function makeMolstarPreview(readRaw: ReadRaw, t: Translate): ComponentTyp
     const format = formatFor(ext)
     const formatLabel = formatLabelFor(ext)
     const name = preview.kind === 'text' ? preview.name : basename(filePath)
-    const structureKind = preview.kind === 'text' || preview.kind === 'too-large' || preview.kind === 'binary'
+    const structureKind = preview.kind === 'text' || preview.kind === 'text-large' || preview.kind === 'too-large' || preview.kind === 'binary'
 
     const applyDark = (next: boolean): void => {
       darkRef.current = next
@@ -89,7 +89,7 @@ export function makeMolstarPreview(readRaw: ReadRaw, t: Translate): ComponentTyp
       void (async () => {
         try {
           // Resolve raw input. For text we already have `content`; for
-          // too-large/binary we fetch bytes through the core's readRawFile.
+          // text-large / too-large / binary we fetch bytes through readRawFile.
           let data: string | ArrayBuffer
           if (preview.kind === 'text') {
             data = preview.content
